@@ -1,112 +1,89 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import type {Node} from 'react';
+import Logo from './src/components/svg/logo';
+
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+	Text,
+	SafeAreaView,
+	StatusBar,
+	StyleSheet,
+	TouchableOpacity,
+	Alert,
+	TextInput
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+	
+	// Дописать функцию-обработчик нажатия на кнопку
+	const onClick = () =>{
+		Alert.alert('click')
+	}
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+	return (
+		<SafeAreaView style={styles.container}>
+			<StatusBar backgroundColor="#FFF" barStyle={'dark-content'} />
+			<Logo style={styles.logo} />
+			<TextInput 
+				style={styles.input} 
+				placeholder="Табельный номер"
+			/>
+			<TextInput 
+				style={styles.input} 
+				placeholder="Пароль"
+			/>
+			<TouchableOpacity style={styles.button} onPress={onClick}>
+				<Text style={styles.text}>Войти</Text>
+			</TouchableOpacity>
+			<TouchableOpacity style={styles.password} onPress={onClick}>
+				<Text style={styles.text, {color: '#0082CD'}}>Забыл пароль?</Text>
+			</TouchableOpacity>
+		</SafeAreaView>
+	);
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+	container: {
+		alignItems: 'center',
+		flex: 1,
+		justifyContent: 'center',
+		backgroundColor: '#FFF',
+		paddingHorizontal: 15,
+		
+	},
+	logo: {
+		width: 208,
+		height: 64,
+		marginBottom: 60
+	},
+	button:{
+		alignItems: 'center',
+		backgroundColor: 'red',
+		width: '90%',
+		height: 56,
+		borderRadius: 8,
+		backgroundColor: '#2E2E82',
+		marginTop: 8
+	},
+	text: {
+		marginTop: 15,
+		alignItems: 'center',
+		textAlign: 'center',
+		fontSize: 16,
+		fontWeight: 'bold',
+		color: '#FFF'
+	},
+	password:{
+		marginTop: 24
+	},
+	input: {
+		width: '90%',
+		paddingVertical: 16,
+		paddingLeft: 16,
+		backgroundColor: "#F6F7FA",
+		borderRadius: 6,
+		marginBottom: 16
+	}
 });
 
 export default App;
