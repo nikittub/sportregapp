@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
 		marginTop: 8
 	},
 	text: {
+		fontFamily: 'poppins',
+		fontWeight: '400',
 		marginTop: 15,
 		alignItems: 'center',
 		textAlign: 'center',
