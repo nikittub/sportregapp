@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/core';
 import Medal from '../components/svg/medal';
+import Football from '../components/svg/football';
+import Hokey from '../components/svg/hokey';
+import Location from '../components/svg/location';
 import Notification from '../components/svg/notification';
 import {
 	View, 
@@ -9,9 +12,9 @@ import {
 	StatusBar,
 	StyleSheet,
 	TouchableOpacity,
-	Image,
 	ScrollView,
-	TouchableHighlight
+	TouchableHighlight,
+	ImageBackground
 } from 'react-native';
 
 export const Screen2 = () => {
@@ -26,11 +29,16 @@ export const Screen2 = () => {
 		<SafeAreaView style={styles.container}>
 			<StatusBar backgroundColor="#FFF" barStyle={'dark-content'} />
 			<View style={styles.header}>
-				<View style={styles.avatar}>
-					<Image />
-				</View>
+				<TouchableHighlight>
+					<ImageBackground 
+						style={styles.avatar}
+						source={require('../../assets/avatar.jpg')}
+					/>
+				</TouchableHighlight>
 				<View style={styles.status}>
-					<Text style={styles.name}>Привет, name!</Text>
+					<TouchableHighlight>
+						<Text style={styles.name}>Привет, name!</Text>
+					</TouchableHighlight>
 					<View style={styles.points}>
 						<Medal/>
 						<Text style={{fontWeight: 'bold', marginLeft: 8, color: '#EA5515'}}>1600</Text>
@@ -64,6 +72,42 @@ export const Screen2 = () => {
 					</TouchableHighlight>
 				</ScrollView>
 			</View>
+			<View  style={styles.events}>
+				<View  style={styles.eventsHeader}>
+					<Text style={{fontSize: 18, fontWeight: 'bold'}}>События рядом</Text>
+					<TouchableOpacity style={styles.underline}>
+						<Text style={{color: '#EA5515'}}>Смотреть все</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
+			<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+				<TouchableOpacity style={styles.eventsCard}>
+					<ImageBackground
+						style={styles.eventsBackground}
+						source={require('../../assets/football.png')} 
+					>
+						<Text>Футбол</Text>
+						<Location/>
+						<Text>10 Mtr Left</Text>
+						<Football/>
+					</ImageBackground>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.eventsCard}>
+					<ImageBackground
+						style={styles.eventsBackground}
+						source={require('../../assets/hokey.png')} 
+					>	
+					</ImageBackground>
+				</TouchableOpacity>
+			</ScrollView>
+			<View  style={styles.events}>
+				<View  style={styles.eventsHeader}>
+					<Text style={{fontSize: 18, fontWeight: 'bold'}}>Все события</Text>
+					<TouchableOpacity style={styles.underline}>
+						<Text style={{color: '#EA5515'}}>Смотреть все</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
 		</SafeAreaView>
 	)
 }
@@ -86,7 +130,8 @@ const styles = StyleSheet.create({
 		width: 40,
 		height: 40,
 		backgroundColor: '#222',
-		borderRadius: 50
+		borderRadius: 50,
+		overflow: 'hidden'
 	},
 	points: {
 		display: 'flex',
@@ -107,9 +152,9 @@ const styles = StyleSheet.create({
 	},
 	marker: {
 		position: 'absolute',
-		width: 6,
-		height: 6,
-		borderRadius: 3,
+		width: 8,
+		height: 8,
+		borderRadius: 4,
 		backgroundColor: '#EA5515',
 		borderWidth: 1,
 		borderColor: '#fff',
@@ -128,5 +173,34 @@ const styles = StyleSheet.create({
 	},
 	scrollbar: {
 		marginTop: 30
+	},
+	events: {
+		marginTop: 30
+	},
+	eventsHeader: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center'
+	},
+	underline: {
+		borderBottomWidth: 1,
+		borderColor: '#EA5515'
+	},
+	eventsCard: {
+		marginTop: 20,
+		width: 180,
+		height: 225,
+		marginRight: 14
+	},
+	eventsBackground: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'flex-end',
+		width: 180,
+		height: 225,
+		backgroundColor: '#222',
+		borderRadius: 8,
+		overflow: 'hidden'
 	}
 });
